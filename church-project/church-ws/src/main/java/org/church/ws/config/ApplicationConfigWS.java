@@ -12,17 +12,11 @@ import com.church.model.applicationConf.ApplicationConfig;
 
 @Configuration
 @ComponentScan(basePackages = "org.church.ws")
-//@ContextConfiguration( classes = {ApplicationConfig.class})
-@Import({ ApplicationConfig.class })
+@Import({ApplicationConfig.class})
 @ImportResource({ "classpath*:META-INF/applicationsConfigWs.xml" })
 @EnableWebMvc
-//@EnableAutoConfiguration
 public class ApplicationConfigWS{
 
-//	public static void main(String[] args){
-//		SpringApplication.run(ApplicationConfigWS.class, args);
-//	}
-	
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.church.core.service.GenericService;
 import org.church.ws.common.CommonResource;
 import org.church.ws.event.PaginatedRetrievedEvent;
 import org.church.ws.event.ResourceCreatedEvent;
@@ -92,5 +93,11 @@ public class MemberWSResource extends CommonResource {
 
         eventPublisher.publishEvent(new ResourceCreatedEvent<Member>(this, toCreate.getMember(),response));
     }
+
+	@Override
+	public GenericService<?, ?, Member> getService() {
+		
+		return this.memberService;
+	}
 	
 }
