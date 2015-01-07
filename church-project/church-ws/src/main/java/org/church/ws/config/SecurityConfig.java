@@ -23,6 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/view/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
+			.authorizeRequests()
+				.antMatchers("/member").hasRole("ADMIN")
+				.anyRequest().hasRole("ADMIN")
+				.and()
 			.formLogin()
 				.loginPage("/view/login.jspx")
 				.permitAll()
@@ -38,8 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		auth
 			.inMemoryAuthentication()
-			.withUser("user")
-			.password("password")
-			.roles("USER");
+				.withUser("user").password("password").roles("USER").and()
+				.withUser("admin").password("admin").roles("ADMIN");
 	}
 }

@@ -6,8 +6,15 @@ package org.church.ws;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+	private String name;
+	
+	public App(String name){
+		this.name = name;
+	}
+	
+    @Override
+    public String toString() {
+    	
+    	return super.toString()+name;
     }
 }
