@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -17,7 +18,10 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@PropertySource(value = { "classpath:META-INF/application.properties" })
+@PropertySources({
+	@PropertySource( value = "file:${ELECTRICITY_CONSUME_PATH}/conf/database.properties, file:/home/electricity_consume/conf/database.properties", ignoreResourceNotFound = true),
+	@PropertySource( value = "classpath:META-INF/local/database.properties"),
+})
 @EnableJpaRepositories(basePackages = { "com.church.model.repository" })
 @EnableTransactionManagement
 public class PersistenceContext {

@@ -1,7 +1,7 @@
 package com.church.test.member;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -52,21 +52,21 @@ public class TestMemberCrud {
 		Assert.assertTrue(memberResult.equals(repository.findByName(memberResult.getName())));
 	}
 	
-//	@Test
-//	public void changeMemberDataTest(){
-//		
-//		Member resolveMemberToChange = this.repository.findByName(name);
-//		resolveMemberToChange.setName("Dario Nascimento vieralves");
-//		this.repository.save(resolveMemberToChange);
-//		Assert.assertNotNull(resolveMemberToChange);
-//	}
+	@Test
+	public void changeMemberDataTest(){
+		
+		Member resolveMemberToChange = this.repository.findByName(name);
+		resolveMemberToChange.setName("Dario Nascimento vieralves");
+		this.repository.save(resolveMemberToChange);
+		Assert.assertNotNull(resolveMemberToChange);
+	}
 	
-//	@Test
-//	public void listMemberTest(){
-//		
-//		List<Member> members = repository.findAll();
-//		Assert.assertFalse(members.isEmpty());
-//	}
+	@Test
+	public void listMemberTest(){
+		
+		List<Member> members = repository.findAll();
+		Assert.assertFalse(members.isEmpty());
+	}
 	
 //	@Test
 //	public void removeTest(){

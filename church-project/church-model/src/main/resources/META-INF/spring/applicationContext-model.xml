@@ -35,5 +35,5 @@
 	<aop:aspectj-autoproxy />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
+	
 </beans>
