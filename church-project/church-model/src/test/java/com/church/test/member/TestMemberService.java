@@ -11,10 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.church.model.applicationConf.ApplicationConfig;
-import com.church.model.entity.Address;
-import com.church.model.entity.Member;
-import com.church.model.service.member.MemberResult;
-import com.church.model.service.member.MemberService;
+import com.church.model.member.entity.Address;
+import com.church.model.member.entity.Member;
+import com.church.model.member.service.MemberResult;
+import com.church.model.member.service.MemberService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

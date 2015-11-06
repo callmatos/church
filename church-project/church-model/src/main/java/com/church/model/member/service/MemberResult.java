@@ -1,4 +1,4 @@
-package com.church.model.service.member;
+package com.church.model.member.service;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import lombok.Data;
 import org.church.core.service.GenericResult;
 import org.springframework.stereotype.Component;
 
-import com.church.model.entity.Member;
+import com.church.model.member.entity.Member;
 
 @Data
 @Component

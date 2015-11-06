@@ -1,4 +1,4 @@
-package com.church.model.entity;
+package com.church.model.member.entity;
 
 import javax.persistence.Entity;
 

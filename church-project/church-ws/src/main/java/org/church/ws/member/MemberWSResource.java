@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.church.model.entity.Member;
-import com.church.model.service.member.MemberResult;
-import com.church.model.service.member.MemberService;
+import com.church.model.member.entity.Member;
+import com.church.model.member.service.MemberResult;
+import com.church.model.member.service.MemberService;
 
 
 

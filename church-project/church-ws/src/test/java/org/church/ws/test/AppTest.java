@@ -17,10 +17,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.church.model.applicationConf.ApplicationConfig;
 import com.church.model.applicationConf.PersistenceContext;
-import com.church.model.entity.Address;
-import com.church.model.entity.Member;
-import com.church.model.repository.member.MemberRepository;
-import com.church.model.service.member.MemberResult;
+import com.church.model.member.entity.Address;
+import com.church.model.member.entity.Member;
+import com.church.model.member.repository.MemberRepository;
+import com.church.model.member.service.MemberResult;
 import com.jayway.restassured.RestAssured;
 
 /**

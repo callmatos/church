@@ -1,9 +1,9 @@
-package com.church.model.service.member;
+package com.church.model.member.service;
 
 import org.church.core.service.GenericService;
 
-import com.church.model.entity.Member;
-import com.church.model.repository.member.MemberRepository;
+import com.church.model.member.entity.Member;
+import com.church.model.member.repository.MemberRepository;
 
 
 public interface MemberService extends GenericService<MemberResult, MemberRepository, Member>{

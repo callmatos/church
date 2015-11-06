@@ -1,4 +1,4 @@
-package com.church.model.service.member;
+package com.church.model.member.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.church.model.entity.Member;
-import com.church.model.repository.member.MemberRepository;
+import com.church.model.member.entity.Member;
+import com.church.model.member.repository.MemberRepository;
 
 @Service
 public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRepository, Member> implements MemberService{

@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 
 import org.church.core.dao.GenericDaoObject;
 
+import com.church.model.member.entity.Month;
+
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=true)
