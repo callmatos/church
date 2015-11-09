@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 import org.church.core.dao.GenericDaoObject;
 
-import com.church.model.member.entity.Month;
+import com.church.model.entity.member.Month;
 
 @Entity
 @Data

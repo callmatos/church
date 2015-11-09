@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 	@PropertySource( value = "file:${ELECTRICITY_CONSUME_PATH}/conf/database.properties, file:/home/electricity_consume/conf/database.properties", ignoreResourceNotFound = true),
 	@PropertySource( value = "classpath:META-INF/local/database.properties"),
 })
-@EnableJpaRepositories(basePackages = { "com.church.model.repository" })
+@EnableJpaRepositories(basePackages = {"com.church.model.*.repository"})
 @EnableTransactionManagement
 public class PersistenceContext {
 

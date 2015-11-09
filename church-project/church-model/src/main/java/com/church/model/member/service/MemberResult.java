@@ -7,7 +7,7 @@ import lombok.Data;
 import org.church.core.service.GenericResult;
 import org.springframework.stereotype.Component;
 
-import com.church.model.member.entity.Member;
+import com.church.model.entity.member.Member;
 
 @Data
 @Component

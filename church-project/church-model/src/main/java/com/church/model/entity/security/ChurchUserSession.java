@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import com.church.model.member.entity.Member;
+import com.church.model.entity.member.Member;
 
 @Data
 @EqualsAndHashCode(callSuper=true)

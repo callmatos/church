@@ -23,17 +23,9 @@
 			type="annotation" />
 	</context:component-scan>
 	
-	<!-- JPA start -->
-	<jpa:repositories base-package="com.church.model" />
-
-	<!-- paging dependency -->
-	<bean name="defaultUrl" class="java.lang.String">
-		<!-- constructor-arg> <value>test</value> </constructor-arg -->
-	</bean>
-	
 	<!-- AOP for logging -->
 	<aop:aspectj-autoproxy />
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	
 	
 </beans>

@@ -13,8 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.church.model.applicationConf.ApplicationConfig;
-import com.church.model.member.entity.Address;
-import com.church.model.member.entity.Member;
+import com.church.model.entity.member.Address;
+import com.church.model.entity.member.Member;
 import com.church.model.member.repository.MemberRepository;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

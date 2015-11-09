@@ -1,4 +1,4 @@
-package com.church.model.member.entity;
+package com.church.model.entity.member;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

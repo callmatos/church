@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
-import com.church.model.member.entity.Member;
+import com.church.model.entity.member.Member;
 
 /**
  * This class is to validator all request to WS '/member*'.
