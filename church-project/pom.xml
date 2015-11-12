@@ -29,12 +29,26 @@
 		<quartz.version>2.2.1</quartz.version>
 		<spring-data-jpa.version>1.5.0.M1</spring-data-jpa.version>
 		<hibernate-entitymanager.version>4.3.0.Final</hibernate-entitymanager.version>
+		<activemq.version>5.10.0</activemq.version>
 
 	</properties>
 
 
 	<dependencies>
-
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.core.version}</version>
+		</dependency>
+		
+		<!-- ActiveMQ Artifacts -->
+	   <dependency>
+	     <groupId>org.apache.activemq</groupId>
+	     <artifactId>activemq-all</artifactId>
+	     <version>${activemq.version}</version>
+	   </dependency>
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
