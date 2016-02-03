@@ -9,6 +9,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
+/**
+ * This is a listener responsible for some thing.
+ * @author charles.ma
+ *
+ */
+
 @Component
 class SingleResourceRetrievedDiscoverabilityListener implements ApplicationListener<SingleResourceRetrievedEvent> {
 

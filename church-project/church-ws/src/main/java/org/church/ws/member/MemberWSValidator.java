@@ -10,7 +10,7 @@ import org.springframework.validation.ValidationUtils;
 import com.church.model.entity.member.Member;
 
 /**
- * This class is to validator all request to WS '/member*'.
+ * This class is to validator all request to WS '/rest/member*'.
  * 
  * This class have the @Component of spring inside the CommonValidation class.
  * @author charles.ma

@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.church.core.exception.DefaultException;
+import org.church.core.exception.common.ErrorHandler;
 import org.church.core.service.GenericService;
 import org.church.ws.common.CommonResource;
 import org.church.ws.event.PaginatedRetrievedEvent;
 import org.church.ws.event.ResourceCreatedEvent;
 import org.church.ws.event.SingleResourceRetrievedEvent;
 import org.church.ws.exception.MyResourceNotFoundException;
+import org.church.ws.member.model.MemberDsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +33,11 @@ import com.church.model.member.service.MemberResult;
 import com.church.model.member.service.MemberService;
 
 
-
 @RestController
-@RequestMapping(value = "/member")
+@RequestMapping(value = "/rest/member")
 public class MemberWSResource extends CommonResource {
 
-	// To logger.
+	// To Logger.
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberWSResource.class);
 	
 	@Autowired
@@ -46,9 +48,34 @@ public class MemberWSResource extends CommonResource {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
-	public List<Member> findAll(){
+	public MemberDsResponse findAll() throws DefaultException{
+		
 		LOGGER.info("List all members inside db.");
-		return this.memberService.findAll().getMembers();
+		
+		MemberDsResponse memberResponse = new MemberDsResponse();
+		
+		try{
+			
+			// Get all member present in DB.
+			memberResponse.setMembers(this.memberService.findAll().getMembers());
+			
+			//Set the result OK.
+			memberResponse.setResultCode(HttpStatus.OK.value());
+			
+			//Set the result message.
+			memberResponse.setResultMessage(HttpStatus.OK.name());
+			
+		}catch(Exception e){
+			
+			LOGGER.error(e.getMessage(),e);
+			
+			//Set the Exception identified
+			DefaultException exception = ErrorHandler.processExcpetion(e);
+			memberResponse.setResultCode(exception.getErrorCode());
+			memberResponse.setResultMessage(exception.getMessage());
+		}
+		
+		return memberResponse;
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
@@ -60,13 +87,17 @@ public class MemberWSResource extends CommonResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	@ResponseBody
 	public Member findOne(@PathVariable("id") Integer id,final HttpServletResponse response){
+		
+		//If necessary send some event enable this code.
 		this.eventPublisher.publishEvent(new SingleResourceRetrievedEvent(this, response));
 		return this.memberService.findById(id).getMember();
 	}
 	
 	@RequestMapping(params = {"page","size"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<Member> findPaginated(@RequestParam("page") final int page, @RequestParam("size")final int size, final UriComponentsBuilder uriBuilder, final HttpServletResponse response){
+	public List<Member> findPaginated(	@RequestParam("page") final int page, 
+										@RequestParam("size")final int size, final UriComponentsBuilder uriBuilder, 
+										final HttpServletResponse response){
 		
 		final Page<Member> resultPage = this.memberService.findPaginated(page, size);
 		
@@ -74,7 +105,9 @@ public class MemberWSResource extends CommonResource {
 			throw new MyResourceNotFoundException();
 		}
 		
+		//If necessary send some event enable this code.
 		this.eventPublisher.publishEvent(new PaginatedRetrievedEvent<Member>(Member.class, uriBuilder, response, page, resultPage.getTotalPages(), size));
+		
 		return resultPage.getContent();
 	}
 	

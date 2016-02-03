@@ -13,6 +13,7 @@ import com.church.model.entity.member.Member;
 import com.church.model.member.repository.MemberRepository;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRepository, Member> implements MemberService{
 
 	@Autowired
@@ -24,7 +25,6 @@ public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRep
 	}
 	
 	@Override
-	@Transactional(rollbackFor = Exception.class)
 	public MemberResult createMember(MemberResult memberResult)
 			throws Exception {
 		
@@ -35,7 +35,6 @@ public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRep
 			me.setPassword("12345678");
 		
 		memberResult.setMember(this.memberRepository.save(me));
-		
 		return memberResult;
 	}
 
@@ -69,7 +68,4 @@ public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRep
 		
 		return memberResult;
 	}
-
-	
-	
 }

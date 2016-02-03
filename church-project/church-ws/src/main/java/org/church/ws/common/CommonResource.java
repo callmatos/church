@@ -22,13 +22,14 @@ public abstract class CommonResource {
 	@Autowired
 	protected HttpServletRequest request;
 	
-	 @Autowired
-	 public ApplicationEventPublisher eventPublisher;
+	/** Used to publisher event to listeners. */
+	@Autowired
+	public ApplicationEventPublisher eventPublisher;
 	 
-	 /**
-	  * This method represent the main service inject to resolve some controller.
-	  * @return
-	  */
-	 public abstract GenericService<?, ?, ?> getService();
+	/**
+	 * This method represent the main service inject to resolve some controller.
+	 * @return
+	 */
+	public abstract GenericService<?, ?, ?> getService();
 	
 }

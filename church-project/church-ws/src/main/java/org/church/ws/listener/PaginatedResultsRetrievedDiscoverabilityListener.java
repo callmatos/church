@@ -27,11 +27,13 @@ class PaginatedResultsRetrievedDiscoverabilityListener implements ApplicationLis
     public final void onApplicationEvent(final PaginatedRetrievedEvent ev) {
 
         addLinkHeaderOnPagedResourceRetrieval(ev.getUriBuilder(), ev.getResponse(), ev.getClazz(), ev.getPage(), ev.getTotalPages(), ev.getPageSize());
+        
     }
 
     // - note: at this point, the URI is transformed into plural (added `s`) in a hardcoded way - this will change in the future
     final void addLinkHeaderOnPagedResourceRetrieval(final UriComponentsBuilder uriBuilder, final HttpServletResponse response, final Class clazz, final int page, final int totalPages, final int pageSize) {
-        plural(uriBuilder, clazz);
+       
+    	plural(uriBuilder, clazz);
 
         final StringBuilder linkHeader = new StringBuilder();
         if (hasNextPage(page, totalPages)) {
