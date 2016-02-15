@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.church.core.service.AbsGenericService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -16,9 +17,6 @@ import com.church.model.member.repository.MemberRepository;
 @Transactional(rollbackFor = Exception.class)
 public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRepository, Member> implements MemberService{
 
-	@Autowired
-	private MemberRepository memberRepository;
-	
 	// Constructor
 	public MemberServiceImpl(){
 		super(MemberRepository.class,MemberResult.class);
@@ -34,7 +32,7 @@ public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRep
 		if(me.getPassword() == null)
 			me.setPassword("12345678");
 		
-		memberResult.setMember(this.memberRepository.save(me));
+		memberResult.setMember(this.getDao().save(me));
 		return memberResult;
 	}
 
@@ -68,4 +66,9 @@ public class MemberServiceImpl extends AbsGenericService<MemberResult, MemberRep
 		
 		return memberResult;
 	}
+	
+//	@Override
+//	public Page<Member> paginationByName(String name, Pageable pageable) {
+//		return this.getDao().findByName(name, pageable);
+//	}
 }

@@ -1,7 +1,5 @@
 package org.church.ws.member;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.church.core.exception.DefaultException;
@@ -17,6 +15,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,6 +48,13 @@ public class MemberWSResource extends CommonResource {
 	@Autowired
 	private MemberWSValidator validator;
 	
+	/**
+	 * Return all members present in DB.
+	 * 
+	 * @return MemberDsResponse with list of members.
+	 * 
+	 * @throws DefaultException
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public MemberDsResponse findAll() throws DefaultException{
@@ -78,12 +87,24 @@ public class MemberWSResource extends CommonResource {
 		return memberResponse;
 	}
 	
+	/**
+	 * Delete member by ID
+	 * 
+	 * @param id of member to delete.
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Integer id){
 		this.memberService.delete(id);
 	}
 	
+	/**
+	 * Find the member by ID and return your information.
+	 * 
+	 * @param id of member to find
+	 * @param reponse is the HttpServletResponse object
+	 * @return Member information. Member object
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	@ResponseBody
 	public Member findOne(@PathVariable("id") Integer id,final HttpServletResponse response){
@@ -93,22 +114,49 @@ public class MemberWSResource extends CommonResource {
 		return this.memberService.findById(id).getMember();
 	}
 	
-	@RequestMapping(params = {"page","size"}, method = RequestMethod.GET)
+	/**
+	 * Use this END-POINT to pagination.
+	 * 
+	 * @param page - the current page
+	 * @param size - How many register to return.
+	 * @param uriBuilder
+	 * @param response
+	 * @return
+	 */
+	
+	/**
+	 * Use this END-POINT to pagination.
+	 * 
+	 * @param pageable - A Pageable will consist of a page, size and sort property.
+	 * @param assembler -will be used to convert the Page of Widget entities into a 
+	 * 					 PagedResources instance which contains not only the underlying data, but also some metadata 
+	 * 					 like the current page number, total number of pages, total number of records, page size, etc.
+	 * @param uriBuilder
+	 * @param response
+	 * @return
+	 */
 	@ResponseBody
-	public List<Member> findPaginated(	@RequestParam("page") final int page, 
-										@RequestParam("size")final int size, final UriComponentsBuilder uriBuilder, 
+	@RequestMapping(params = {"page","size"}, method = RequestMethod.GET)
+	public Page<Member> findPaginated( @RequestParam("page") final int page, 
+									   @RequestParam("size")final int size,
+									   Pageable pageable, 
+									   PagedResourcesAssembler assembler, final UriComponentsBuilder uriBuilder, 
 										final HttpServletResponse response){
 		
-		final Page<Member> resultPage = this.memberService.findPaginated(page, size);
+		// Pageable 
+		PageRequest pageReq = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),pageable.getSort());
 		
-		if(page > resultPage.getTotalPages()){
+		final Page<Member> resultPage = this.memberService.findPaginated(pageReq);
+//		final Page<Member> resultPage = this.memberService.paginationByName("Rodrigo de Matos Araujo", pageable);
+		
+		if(pageable.getPageNumber() > resultPage.getTotalPages()){
 			throw new MyResourceNotFoundException();
 		}
 		
 		//If necessary send some event enable this code.
-		this.eventPublisher.publishEvent(new PaginatedRetrievedEvent<Member>(Member.class, uriBuilder, response, page, resultPage.getTotalPages(), size));
+		this.eventPublisher.publishEvent(new PaginatedRetrievedEvent<Member>(Member.class, uriBuilder, response, pageable.getPageNumber(), resultPage.getTotalPages(), pageable.getPageSize()));
 		
-		return resultPage.getContent();
+		return resultPage;//assembler.toResource(resultPage);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -132,5 +180,5 @@ public class MemberWSResource extends CommonResource {
 		
 		return this.memberService;
 	}
-	
+
 }

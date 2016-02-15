@@ -17,8 +17,12 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	*/
 	Member findByName(String name);
 	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	@Query("SELECT m from Member m WHERE LOWER(m.name) = LOWER(:name)")
 	Member retrieveByName(@Param("name") String name);
-	
 	
 }

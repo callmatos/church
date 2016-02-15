@@ -1,6 +1,7 @@
 package org.church.core.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * This interface represent the base interface to construct Service.
@@ -20,7 +21,7 @@ public interface GenericService<DTO,DAO,DOMAIN> {
 	public abstract DTO findById(Integer id);
 	
 	//Method to pagination
-	Page<DOMAIN> findPaginated(int page,int size);
+	Page<DOMAIN> findPaginated(Pageable pagination);
 	
 	//Method to delete Entity with id
 	public abstract void delete(Integer id);

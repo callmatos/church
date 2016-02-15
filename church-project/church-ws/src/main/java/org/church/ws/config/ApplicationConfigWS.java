@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.church.model.applicationConf.ApplicationConfig;
@@ -17,6 +18,7 @@ import com.church.model.applicationConf.ApplicationConfig;
 @Import({ApplicationConfig.class})
 @ImportResource({ "classpath*:META-INF/applicationsConfig.xml" })
 @EnableWebMvc
+@EnableSpringDataWebSupport
 public class ApplicationConfigWS{
 
 	@Autowired
