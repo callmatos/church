@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,9 +54,9 @@ public class MemberWSResource extends CommonResource {
 	 * 
 	 * @throws DefaultException
 	 */
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value = "/members",method=RequestMethod.GET)
 	@ResponseBody
-	public MemberDsResponse findAll() throws DefaultException{
+	public MemberDsResponse membersList() throws DefaultException{
 		
 		LOGGER.info("List all members inside db.");
 		
@@ -113,17 +112,7 @@ public class MemberWSResource extends CommonResource {
 		this.eventPublisher.publishEvent(new SingleResourceRetrievedEvent(this, response));
 		return this.memberService.findById(id).getMember();
 	}
-	
-	/**
-	 * Use this END-POINT to pagination.
-	 * 
-	 * @param page - the current page
-	 * @param size - How many register to return.
-	 * @param uriBuilder
-	 * @param response
-	 * @return
-	 */
-	
+
 	/**
 	 * Use this END-POINT to pagination.
 	 * 

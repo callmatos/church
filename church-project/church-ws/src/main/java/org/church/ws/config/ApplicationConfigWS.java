@@ -1,7 +1,5 @@
 package org.church.ws.config;
 
-import org.church.ws.App;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +19,6 @@ import com.church.model.applicationConf.ApplicationConfig;
 @EnableSpringDataWebSupport
 public class ApplicationConfigWS{
 
-	@Autowired
-	private App myapp;
-	
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
